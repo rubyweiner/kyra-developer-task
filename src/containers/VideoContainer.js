@@ -4,7 +4,10 @@ import { Divider, Icon} from 'semantic-ui-react';
 import youtube from '../youtube.js';
 import VideoList from '../components/VideoList.js';
 
-const key = 'AIzaSyBtEvB8-6JTbK1alH0jZlP0yedw5VA_a3c';
+const key = 'AIzaSyDOEvKjqF6jyaGEDDc-pc6BDaPrBhtHSJk';
+const channel_id = 'UCvO6uJUVJQ6SrATfsWR5_aA';
+const maxResults = 5;
+
 class VideoContainer extends Component {
 
   state = {
@@ -13,12 +16,14 @@ class VideoContainer extends Component {
     selectedVideo: null
   }
 
+
   fetchVideos = () => {
-    fetch (`https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&forUsername=PAQ&maxResults=5&key=[${key}]`)
+    fetch (`https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channel_id}&key=${key}`)
     .then(response => response.json())
     .then(json => {
-      this.setState({videoData: json})
-      console.log(this.state.userData)
+      console.log(json.items)
+      // this.setState({videoData: json})
+      // console.log(this.state.userData.snippet)
     })
   }
 
