@@ -6,10 +6,9 @@ import VideoContainer from './containers/VideoContainer';
 function App() {
   return (
     <div className= 'parallax'>
-
-
-      <BodyContainer className='body'/>
-      <VideoContainer className='body'/>
+    
+      <div className='body'></div>
+      <VideoContainer className='videos'/>
 
     </div>
   );

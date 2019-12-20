@@ -1,19 +1,26 @@
-import React from 'react';
-import VideoItem from './VideoList.js';
-// import '../style/video.css';
+import React, { Component } from 'react';
+import {Container} from 'react-bootstrap';
+import { Divider} from 'semantic-ui-react'
 
-const VideoList = () => {
-  return(
-    <div>
+import VideoItem from './VideoItem.js';
 
-    </div>
-  )
+class VideoList extends Component {
+
+  render() {
+    return (
+      <Container>
+      <h3>Videos </h3>
+      <Divider />
+      { this.props.videos.length > 0?
+        this.props.videos.map(video =>
+          <VideoItem video={video}/>
+        )
+      :
+        <h1>unable to load videos</h1>
+      }
+
+      </Container>
+    )
+  }
 }
 export default VideoList;
-// { this.props.videos[0] ?
-//   this.props.videos.map(video =>
-//     <VideoItem video={video} />
-//   )
-// :
-//   <p>this channel has no videos</p>
-// }
