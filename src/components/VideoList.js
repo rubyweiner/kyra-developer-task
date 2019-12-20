@@ -1,15 +1,19 @@
 import React from 'react';
-import VideoItem from './VideoItem';
+import VideoItem from './VideoList.js';
+// import '../style/video.css';
 
+const VideoList = () => {
+  return(
+    <div>
 
-const VideoList = ({videos, handleSelectVideo}) => {
-  const renderedVideos = videos.map((video) => {
-    return <VideoItem key={video.id.videoId}
-                      video={video}
-                      handleSelectVideo={handleSelectVideo} />
-  });
-
-  return <div className= 'ui relaxed divided list'>{renderedVideos}</div>;
-};
-
+    </div>
+  )
+}
 export default VideoList;
+// { this.props.videos[0] ?
+//   this.props.videos.map(video =>
+//     <VideoItem video={video} />
+//   )
+// :
+//   <p>this channel has no videos</p>
+// }

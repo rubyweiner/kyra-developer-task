@@ -9,7 +9,7 @@ function App() {
 
 
       <BodyContainer className='body'/>
-      <VideoContainer className='videos'/>
+      <VideoContainer className='body'/>
 
     </div>
   );

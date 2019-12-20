@@ -1,42 +1,59 @@
 import React, { Component } from 'react';
-import {Container, Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
-import { Divider, Icon} from 'semantic-ui-react';
-import youtube from '../youtube.js';
 import VideoList from '../components/VideoList.js';
 
-const key = 'AIzaSyDOEvKjqF6jyaGEDDc-pc6BDaPrBhtHSJk';
+const key = 'AIzaSyDgtC4SEh9uDfuR-26PQaL8HK7swujiRxs';
 const channel_id = 'UCvO6uJUVJQ6SrATfsWR5_aA';
-const maxResults = 5;
 
 class VideoContainer extends Component {
 
   state = {
-    videoData: null,
-    videos: [],
-    selectedVideo: null
+    next_page_token: '',
+    videos: []
   }
 
+  componentDidMount() {
+   this.fetchChannel()
+  }
 
-  fetchVideos = () => {
+  fetchChannel = () => {
     fetch (`https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channel_id}&key=${key}`)
     .then(response => response.json())
     .then(json => {
-      console.log(json.items)
-      // this.setState({videoData: json})
-      // console.log(this.state.userData.snippet)
+      debugger
+      this.collectVideos(json.items[0].contentDetails.relatedPlaylists.uploads)
     })
   }
 
-  handleSelectVideo = (video) => {
-    this.setState({selectedVideo: video})
+  collectVideos = (uploads_id) => {
+    while (this.state.next_page_token != null) {
+      console.log('hi')
+      this.fetchVideos(uploads_id)
+    }
+    debugger
   }
+
+  fetchVideos = (uploads_id) => {
+    let video_list = this.state.videos
+    fetch (`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${uploads_id}&key=${key}`)
+    .then(response => response.json())
+    .then(json => {
+      if (json.nextPageToken) {
+        this.setState({next_page_token: json.nextPageToken})
+      } else {
+        this.setState({next_page_token: null})
+      }
+      this.setState({videos: video_list.push(json.items)})
+    })
+  }
+
 
   render() {
     return (
       <div className='ui grid'>
         <div className='ui row'>
           <div className='five wide column'>
-            <VideoList handleSelectVideo= {this.handleSelectVideo} videos={this.state.videos}  onload={this.fetchVideos()}/>
+
+            <VideoList />
           </div>
         </div>
       </div>
