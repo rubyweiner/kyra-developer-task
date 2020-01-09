@@ -59,17 +59,15 @@ class VideoContainer extends Component {
         this.addVideos(video_list)
       )
     }
-    console.log(this.state.video_count)
-    console.log(this.state.videos.length)
+    // console.log(this.state.video_count)
+    // console.log(this.state.videos.length)
   }
 
   addVideos(video_list) {
     for (let i = 0; i < this.state.new_videos.length; i++) {
       video_list.push(this.state.new_videos[i])
     }
-    // console.log(video_list)
     this.setState({videos: video_list})
-
   }
 
 
