@@ -4,8 +4,9 @@ import VideoList from '../components/VideoList.js';
 import VideoItem from '../components/VideoItem.js';
 import Chart from '../components/Chart.js';
 
-
-const key = 'AIzaSyAebVqV46rdRIq-mowvztwxwUMa_3UvTeo';
+// AIzaSyAebVqV46rdRIq-mowvztwxwUMa_3UvTeo
+// AIzaSyAWsDXaExq_QmVSA1MShz_-vExkILp4Nsg
+const key = 'AIzaSyAWsDXaExq_QmVSA1MShz_-vExkILp4Nsg';
 const channel_id = 'UCvO6uJUVJQ6SrATfsWR5_aA';
 // const upload_id = 'UUvO6uJUVJQ6SrATfsWR5_aA';
 
