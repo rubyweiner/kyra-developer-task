@@ -14,7 +14,8 @@ class VideoContainer extends Component {
   state = {
     next_page_token: '',
     video_count: 0,
-    videos: []
+    videos: [],
+    new_videos: []
   }
 
   componentDidMount() {
@@ -22,42 +23,53 @@ class VideoContainer extends Component {
   }
 
   fetchChannel = () => {
+    var uploads_id
     fetch (`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channel_id}&key=${key}`)
     .then(response => response.json())
     .then(json => {
-
-      this.collectVideos(json.items[0].contentDetails.relatedPlaylists.uploads)
+      uploads_id = json.items[0].contentDetails.relatedPlaylists.uploads
+      this.loadVideos(uploads_id)
     })
   }
 
-  collectVideos = (uploads_id) => {
-    for (let i = 0; i < 3; i++) {
-      console.log(this.state.next_page_token)
-      this.fetchVideos(uploads_id)
-    }
-  }
 
-  fetchVideos = (uploads_id) => {
-      let token = this.state.next_page_token
+  fetchVideos(uploads_id) {
+    return new Promise(resolve => {
       fetch (`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&pageToken=${this.state.next_page_token}&playlistId=${uploads_id}&key=${key}`)
       .then(response => response.json())
       .then(json => {
         this.setState({video_count: json.pageInfo.totalResults})
-        this.parseVideos(json.items, json.nextPageToken)
+        json.nextPageToken ? this.setState({next_page_token: json.nextPageToken}): this.setState({next_page_token: ''})
+        this.setState({new_videos: json.items})
+        resolve(json)
       })
+    })
 
   }
 
-  parseVideos = (videos, nextPageToken) => {
-    let video_list = this.state.videos
 
-    for (let i = 0; i < videos.length; i++) {
-      video_list.push(videos[i])
+
+
+   async loadVideos(uploads_id) {
+    // let x = Math.ceil(this.state.video_count/50)
+    for (let i = 0; i <= 3; i++) {
+      let video_list = this.state.videos
+      let videosRequest = this.fetchVideos(uploads_id)
+      await videosRequest.then(
+        this.addVideos(video_list)
+      )
     }
+    console.log(this.state.video_count)
+    console.log(this.state.videos.length)
+  }
 
+  addVideos(video_list) {
+    for (let i = 0; i < this.state.new_videos.length; i++) {
+      video_list.push(this.state.new_videos[i])
+    }
+    // console.log(video_list)
     this.setState({videos: video_list})
-    console.log(nextPageToken)
-    this.setState({next_page_token: nextPageToken})
+
   }
 
 
