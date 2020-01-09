@@ -12,7 +12,7 @@ class VideoList extends Component {
       <h3>Videos </h3>
       <Divider />
       { this.props.videos.length > 0?
-        this.props.videos.map(video =>
+        this.props.videos.slice(0, 10).map(video =>
           <VideoItem video={video}/>
         )
       :
