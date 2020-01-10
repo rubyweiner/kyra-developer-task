@@ -3,6 +3,10 @@ import {Row, Media} from 'react-bootstrap';
 import { Divider} from 'semantic-ui-react'
 
 class VideoItem extends Component  {
+
+  componentDidMount() {
+
+  }
  render() {
    return (
      <div>
@@ -13,13 +17,13 @@ class VideoItem extends Component  {
             width={120}
             height={90}
             className="mr-3"
-            src={this.props.video.snippet.thumbnails.default.url}
+            src={this.props.video.thumbnail}
             alt="Generic placeholder"
           />
           <Media.Body>
-            <h5>{this.props.video.snippet.title}</h5>
+            <h5>{this.props.video.title}</h5>
             <p>
-              {this.props.video.snippet.description}
+              {this.props.video.publishedAt.toString()}
             </p>
           </Media.Body>
         </Media>

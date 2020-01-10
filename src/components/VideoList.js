@@ -11,12 +11,12 @@ class VideoList extends Component {
       <Container>
       <h3>Videos ({this.props.totalCount})</h3>
       <Divider />
-      { this.props.videos.length > 0?
-        this.props.videos.slice(0, 10).map(video =>
-          <VideoItem video={video}/>
-        )
+      { this.props.videos.length > 0 ?
+          this.props.videos.slice(0, 10).map(video =>
+            <VideoItem video={video}/>
+          )
       :
-        <h1>unable to load videos</h1>
+        <h3>loading videos...</h3>
       }
 
       </Container>
