@@ -17,13 +17,14 @@ background-size: cover;
 
 .videos {
   width: 30%;
-    height: auto;
-    background-size: cover;
-    background-color: white;
+  height: auto;
+  background-size: cover;
+  background-color: white;
 }
 
 .image {
   width: 100%;
+  height: auto;
   padding-bottom: 5vh;
 }
 .graphContainer {
