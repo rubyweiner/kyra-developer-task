@@ -79,31 +79,59 @@ class BodyContainer extends Component {
 
   collectGraphData() {
     let sortVideosByDate = this.state.videos.reverse()
-    this.setState({sorted_videos: sortVideosByDate})
+    let CurrentDate = new Date()
+    CurrentDate.setMonth(CurrentDate.getMonth() - 18);
+
+    this.setState({sorted_videos: sortVideosByDate.filter(video => video.publishedAt > CurrentDate)})
+
     console.log(this.state.sorted_videos)
+
     this.groupByWeek()
   }
 
   groupByWeek() {
-    let data = []
     let counter = []
-
     for (let i=0; i < this.state.sorted_videos.length; i++) {
-      counter.push({date: this.getMonday(this.state.sorted_videos[i].publishedAt), count: 1})
+      counter.push(this.getMonday(this.state.sorted_videos[i].publishedAt))
     }
-
-    for (let j=0; j < counter.length; j++) {
-
-    }
-
-    console.log(counter)
+    this.countVideosPerWeek(counter)
   }
+
 
   getMonday(d) {
     var day = d.getDay();
     var diff = d.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(d.setDate(diff));
+    let monday = new Date(d.setDate(diff));
+    return monday.toString().split(' ').slice(0, 4).join(' ')
   }
+
+  countVideosPerWeek(counter) {
+    let countedVideos = counter.reduce(function (allVideos, video) {
+      if (video in allVideos) {
+        allVideos[video]++
+      }
+      else {
+        allVideos[video] = 1
+      }
+      return allVideos
+    }, {})
+    this.createDatapoints(countedVideos)
+    // console.log(countedVideos)
+
+
+  }
+
+  createDatapoints(countedVideos) {
+    let data = []
+
+    for (let element in countedVideos) {
+      data.push([element, countedVideos[element]])
+
+    }
+
+    console.log(data)
+  }
+
 
   render() {
     return (
