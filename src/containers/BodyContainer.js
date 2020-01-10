@@ -143,13 +143,13 @@ class BodyContainer extends Component {
       <Container>
         <Row>
           <Col xs={12} md={7}>
-            <Row >
+            <Row className='image'>
               <Image src='https://4.bp.blogspot.com/-3e80mfE1HuY/XEOkdpKBH4I/AAAAAAAAAiQ/eci-HLj5J188Uvf-ZIAfudd0B2JxxBJoACLcBGAs/s1600/PAQ%2Bboys.jpg' fluid />
             </Row>
             <Row>
             </Row>
             <Row className='graphContainer'>
-              <h3>Video Uploads per Week</h3>
+              <h3>Video Uploads per Week (last 18 months)</h3>
               <div className='graph'>
                 <Chart
                   width={'100%'}
