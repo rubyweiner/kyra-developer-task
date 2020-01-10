@@ -14,16 +14,16 @@ class VideoItem extends Component  {
       <Row>
         <Media>
           <img
-            width={120}
-            height={90}
+            width={90}
+            height={60}
             className="mr-3"
             src={this.props.video.thumbnail}
             alt="Generic placeholder"
           />
           <Media.Body>
-            <h5>{this.props.video.title}</h5>
+            <h6>{this.props.video.title}</h6>
             <p>
-              {this.props.video.publishedAt.toString()}
+              {this.props.video.publishedAt.toString().split(' ').slice(1, 4).join(' ')}
             </p>
           </Media.Body>
         </Media>

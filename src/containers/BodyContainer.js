@@ -4,7 +4,7 @@ import VideoList from '../components/VideoList.js';
 import VideoItem from '../components/VideoItem.js';
 // import Chart from '../components/Chart.js';
 import { Chart } from "react-google-charts";
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid, Image, Divider } from 'semantic-ui-react'
 
 // AIzaSyAebVqV46rdRIq-mowvztwxwUMa_3UvTeo
 // AIzaSyAWsDXaExq_QmVSA1MShz_-vExkILp4Nsg
@@ -19,7 +19,8 @@ class BodyContainer extends Component {
     video_count: 0,
     videos: [],
     new_videos: [],
-    sorted_videos: []
+    sorted_videos: [],
+    data: [['Week', 'Number of Videos']]
   }
 
   componentDidMount() {
@@ -78,13 +79,14 @@ class BodyContainer extends Component {
   }
 
   collectGraphData() {
-    let sortVideosByDate = this.state.videos.reverse()
+    let sortVideosByDate = this.state.videos
     let CurrentDate = new Date()
     CurrentDate.setMonth(CurrentDate.getMonth() - 18);
 
     this.setState({sorted_videos: sortVideosByDate.filter(video => video.publishedAt > CurrentDate)})
 
-    console.log(this.state.sorted_videos)
+    let x = this.state.sorted_videos.reverse()
+    this.setState({sorted_videos: x})
 
     this.groupByWeek()
   }
@@ -102,7 +104,7 @@ class BodyContainer extends Component {
     var day = d.getDay();
     var diff = d.getDate() - day + (day === 0 ? -6 : 1);
     let monday = new Date(d.setDate(diff));
-    return monday.toString().split(' ').slice(0, 4).join(' ')
+    return monday.toString().split(' ').slice(1, 4).join(' ')
   }
 
   countVideosPerWeek(counter) {
@@ -122,14 +124,15 @@ class BodyContainer extends Component {
   }
 
   createDatapoints(countedVideos) {
-    let data = []
+    let allData = this.state.data
 
     for (let element in countedVideos) {
-      data.push([element, countedVideos[element]])
+      allData.push([element, countedVideos[element]])
 
     }
 
-    console.log(data)
+    this.setState({data: allData})
+    console.log(allData)
   }
 
 
@@ -140,25 +143,17 @@ class BodyContainer extends Component {
           <VideoList videos={this.state.videos} totalCount={this.state.video_count}/>
         </Grid.Column>
         <Grid.Column>
+          <h3>Video Uploads per Week</h3>
+          <Divider />
           <Chart
-            width={'500px'}
+            width={'600px'}
             height={'300px'}
-            chartType="ScatterChart"
+            chartType="LineChart"
             loader={<div>Loading Chart</div>}
-            data={[
-              ['Week', 'Number of Videos'],
-              [8, 37],
-              [4, 19.5],
-              [11, 52],
-              [4, 22],
-              [3, 16.5],
-              [6.5, 32.8],
-              [14, 72],
-            ]}
+            data={this.state.data}
             options={{
-              title: 'Videos Per Week',
-              hAxis: { title: 'Week', minValue: 0, maxValue: 72},
-              vAxis: { title: 'Number of Videos', minValue: 0, maxValue: 5 },
+              hAxis: { title: 'Week Of'},
+              vAxis: { title: 'Number of Videos', maxValue: 3},
               legend: 'none',
               trendlines: { 0: {} },
             }}
