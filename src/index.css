@@ -11,18 +11,24 @@ background-size: cover;
   width: 100%;
   height: 45vh;
   background-size: cover;
+  padding: 2vh;
 
 }
 
-/* .chart {
-  width: 100%;
-  height: 50vh;
-  background-size: cover;
-
-} */
 .videos {
-  width: 100%;
+  width: 30%;
     height: auto;
     background-size: cover;
     background-color: white;
+}
+
+.graphContainer {
+  
+  padding-top: 5vh;
+}
+
+.graph {
+  width: 100%;
+  height: 40vh;
+  padding-bottom: 5vh;
 }

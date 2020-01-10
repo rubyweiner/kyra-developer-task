@@ -6,11 +6,10 @@ import BodyContainer from './containers/BodyContainer';
 
 function App() {
   return (
-    <div className= 'parallax'>
-
-      <div className='body'></div>
+    <div>
+      <div className='body'>
         <BodyContainer className='videos'/>
-
+      </div>
     </div>
   );
 }

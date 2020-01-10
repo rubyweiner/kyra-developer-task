@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {Container} from 'react-bootstrap';
+import {Container, Image, Row, Col} from 'react-bootstrap';
 import VideoList from '../components/VideoList.js';
 import VideoItem from '../components/VideoItem.js';
 // import Chart from '../components/Chart.js';
 import { Chart } from "react-google-charts";
-import { Grid, Image, Divider } from 'semantic-ui-react'
+import { Grid, Divider } from 'semantic-ui-react'
 
 // AIzaSyAebVqV46rdRIq-mowvztwxwUMa_3UvTeo
 // AIzaSyAWsDXaExq_QmVSA1MShz_-vExkILp4Nsg
@@ -138,29 +138,42 @@ class BodyContainer extends Component {
 
   render() {
     return (
-      <Grid columns='equal' celled>
-        <Grid.Column >
-          <VideoList videos={this.state.videos} totalCount={this.state.video_count}/>
-        </Grid.Column>
-        <Grid.Column>
-          <h3>Video Uploads per Week</h3>
-          <Divider />
-          <Chart
-            width={'600px'}
-            height={'300px'}
-            chartType="LineChart"
-            loader={<div>Loading Chart</div>}
-            data={this.state.data}
-            options={{
-              hAxis: { title: 'Week Of'},
-              vAxis: { title: 'Number of Videos', maxValue: 3},
-              legend: 'none',
-              trendlines: { 0: {} },
-            }}
-            rootProps={{ 'data-testid': '1' }}
-          />
-        </Grid.Column>
-      </Grid>
+
+      <div>
+      <Container>
+        <Row>
+          <Col xs={12} md={7}>
+            <Row >
+              <Image src='https://4.bp.blogspot.com/-3e80mfE1HuY/XEOkdpKBH4I/AAAAAAAAAiQ/eci-HLj5J188Uvf-ZIAfudd0B2JxxBJoACLcBGAs/s1600/PAQ%2Bboys.jpg' fluid />
+            </Row>
+            <Row>
+            </Row>
+            <Row className='graphContainer'>
+              <h3>Video Uploads per Week</h3>
+              <div className='graph'>
+                <Chart
+                  width={'100%'}
+                  height={'100%'}
+                  chartType="LineChart"
+                  loader={<div>Loading Chart</div>}
+                  data={this.state.data}
+                  options={{
+                    hAxis: { title: 'Week Of'},
+                    vAxis: { title: 'Number of Videos', maxValue: 3},
+                    legend: 'none',
+                    trendlines: { 0: {} },
+                  }}
+                  rootProps={{ 'data-testid': '1' }}
+                />
+              </div>
+            </Row>
+          </Col>
+          <Col className="videos">
+            <VideoList videos={this.state.videos} totalCount={this.state.video_count}/>
+          </Col>
+        </Row>
+      </Container>
+      </div>
     )
   }
 }
