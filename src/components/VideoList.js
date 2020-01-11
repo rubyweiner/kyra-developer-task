@@ -10,8 +10,7 @@ class VideoList extends Component {
   render() {
     return (
       <Container>
-      <h3>Videos ({this.props.totalCount})</h3>
-
+      <h3 className='fontBold'>Videos ({this.props.totalCount})</h3>
       <Divider />
       <Item.Group>
 

@@ -6,11 +6,11 @@ import BodyContainer from './containers/BodyContainer';
 
 function App() {
   return (
-    <div>
-      <div className='body'>
-        <BodyContainer className='videos'/>
-      </div>
+
+    <div className='body'>
+      <BodyContainer />
     </div>
+
   );
 }
 

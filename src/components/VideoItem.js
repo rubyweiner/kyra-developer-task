@@ -20,9 +20,9 @@ class VideoItem extends Component  {
             src={this.props.video.thumbnail}
             alt="Generic placeholder"
           />
-          <Media.Body>
-            <h6>{this.props.video.title}</h6>
-            <p>
+          <Media.Body >
+            <h6 className='fontBold'>{this.props.video.title}</h6>
+            <p className='font'>
               {this.props.video.publishedAt.toString().split(' ').slice(1, 4).join(' ')}
             </p>
           </Media.Body>

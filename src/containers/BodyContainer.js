@@ -149,7 +149,7 @@ class BodyContainer extends Component {
             <Row>
             </Row>
             <Row className='graphContainer'>
-              <h3>Video Uploads per Week (last 18 months)</h3>
+              <h3 className='fontBold'>Video Uploads per Week </h3>
               <div className='graph'>
                 <Chart
                   width={'100%'}
@@ -161,7 +161,7 @@ class BodyContainer extends Component {
                     hAxis: { title: 'Week Of'},
                     vAxis: { title: 'Number of Videos', maxValue: 3},
                     legend: 'none',
-                    trendlines: { 0: {} },
+                    trendlines: { 0: {} }
                   }}
                   rootProps={{ 'data-testid': '1' }}
                 />

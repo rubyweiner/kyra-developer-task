@@ -1,34 +1,43 @@
 
-.parallax {
-width: 100%;
-height: 40vh;
-background-image: url("https://4.bp.blogspot.com/-3e80mfE1HuY/XEOkdpKBH4I/AAAAAAAAAiQ/eci-HLj5J188Uvf-ZIAfudd0B2JxxBJoACLcBGAs/s1600/PAQ%2Bboys.jpg");
-background-repeat: no-repeat;
-background-size: cover;
-}
+
 
 .body {
   width: 100%;
-  height: 45vh;
   background-size: cover;
+  background-color: black;
   padding: 2vh;
+
+}
+
+.fontBold {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: bold;
+}
+
+.font {
+  font-family: 'Montserrat', sans-serif;
 
 }
 
 .videos {
   width: 30%;
   height: auto;
-  background-size: cover;
   background-color: white;
+  padding-top: 1vh;
+
 }
 
 .image {
-  width: 100%;
+  width: auto;
   height: auto;
   padding-bottom: 5vh;
+  padding-right: 5vh;
 }
 .graphContainer {
-  padding-top: 5vh;
+  padding-top: 4vh;
+  padding-right: 5vh;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
 }
 
 .graph {
